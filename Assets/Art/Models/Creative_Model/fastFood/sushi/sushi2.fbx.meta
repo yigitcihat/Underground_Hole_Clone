@@ -3,7 +3,27 @@ guid: 5ed0b7fba48db424e8bfa0a62c47dcbb
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.062
+    second: {fileID: 2100000, guid: 8d16fba37b40b8d43943b21fca96e278, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.063
+    second: {fileID: 2100000, guid: 772205176a4c2b7428d1b58fc33913f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stripe
+    second: {fileID: 2100000, guid: 818ed4f786babda47b8b0d1e13ce68fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rice
+    second: {fileID: 2100000, guid: 56d5a20dfc061224b84ac2e4e5c3dd78, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
