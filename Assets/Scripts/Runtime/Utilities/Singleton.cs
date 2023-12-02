@@ -31,10 +31,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private static bool _applicationIsQuitting = false;
-
-    public void OnDestroy()
-    {
-        _applicationIsQuitting = true;
-    }
+   
 }
