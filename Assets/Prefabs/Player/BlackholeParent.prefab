@@ -213,8 +213,7 @@ GameObject:
   - component: {fileID: 5207331535966228294}
   - component: {fileID: 5207331535966228296}
   - component: {fileID: 5207331535966228297}
-  - component: {fileID: 5207331535966228293}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blackhole
   m_TagString: Blackhole
   m_Icon: {fileID: 0}
@@ -286,20 +285,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5207331535966228293
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207331535966228295}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5207331536468801825
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +296,7 @@ GameObject:
   - component: {fileID: 5207331536468801824}
   - component: {fileID: 5207331536468801830}
   - component: {fileID: 5207331536468801831}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SideMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5207331536968523205}
   - component: {fileID: 6826817357299084152}
+  - component: {fileID: 7541864552698044008}
   m_Layer: 0
   m_Name: BlackholeParent
   m_TagString: Untagged
@@ -439,6 +425,22 @@ MonoBehaviour:
   maxZ: 16
   minZ: -2
   moveSpeed: 1
+--- !u!114 &7541864552698044008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207331536968523206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2ecd02cb3b2f24f98af9ab30e0be84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holeCollider2D: {fileID: 0}
+  groundCollider2D: {fileID: 0}
+  generatedMeshCollider: {fileID: 0}
+  initialScale: 0.5
 --- !u!1 &7423631284942327978
 GameObject:
   m_ObjectHideFlags: 0
