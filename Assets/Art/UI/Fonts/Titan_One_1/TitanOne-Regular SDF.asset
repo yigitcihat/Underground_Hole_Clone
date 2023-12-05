@@ -2697,13 +2697,13 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineShininess: 0
-    - _OutlineSoftness: 0
+    - _OutlineSoftness: 0.008
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.67368424
+    - _ScaleRatioA: 0.66917604
     - _ScaleRatioB: 0.73125
     - _ScaleRatioC: 0.65
     - _ScaleX: 1

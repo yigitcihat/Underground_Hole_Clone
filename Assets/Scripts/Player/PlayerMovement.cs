@@ -3,7 +3,7 @@ using UnityEngine;
 
     public class PlayerMovement : MonoBehaviour
     {
-        public float moveSpeed =5;
+        public float moveSpeed =1;
         public Joystick joystick;
         private Animator _animator;
         private Rigidbody _rb;
@@ -22,13 +22,14 @@ using UnityEngine;
 
         private void Start()
         {
-            moveSpeed = PlayerPrefs.GetFloat("PlayerSpeed", 5);
+            moveSpeed = PlayerPrefs.GetFloat("PlayerSpeed", moveSpeed);
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
         }
 
         private void Update()
         {
+            if (Game.IsHole) return;
             var horizontalInput = joystick.Horizontal;
             var verticalInput = joystick.Vertical;
 

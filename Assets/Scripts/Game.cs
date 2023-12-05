@@ -1,5 +1,6 @@
-﻿public class Game
+﻿public static class Game
 {
-	public static bool isGameover = false;
-	public static bool isMoving = false;
+	public static bool IsGameOver = false;
+	public static bool IsHole = false;
+	public static bool IsMoving = false;
 }

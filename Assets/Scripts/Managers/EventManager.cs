@@ -10,6 +10,7 @@ public enum GameEvent
     OnNavmeshSurfaceUpdate,
     NewZoneActivated,
     OnCharacterUpgrade,
+    OnUpgradeTimer,
     OnHoleUpgrade,
     OnMoneyCollect,
     OnLevelDataChange,

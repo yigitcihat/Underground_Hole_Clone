@@ -18,26 +18,24 @@ public class HoleMovement : MonoBehaviour
     [SerializeField] MeshFilter meshFilter;
     [SerializeField] MeshCollider meshCollider;
 
-    private Mesh mesh;
-    private List<int> holeVertices;
-    private List<Vector3> offsets;
-    private int holeVerticesCount;
-    private float x, y;
+    private Mesh _mesh;
+    private List<int> _holeVertices;
+    private List<Vector3> _offsets;
+    private int _holeVerticesCount;
     private const float ROTATION_SPEED = 500;
-    private Vector3 touch, targetPos,originalScale;
-    private float currentRadius;
     private void Start()
     {
-        Game.isMoving = false;
-        Game.isGameover = false;
-        holeVertices = new List<int>();
-        offsets = new List<Vector3>();
-        mesh = meshFilter.mesh;
+        Game.IsMoving = false;
+        Game.IsGameOver = false;
+        _holeVertices = new List<int>();
+        _offsets = new List<Vector3>();
+        _mesh = meshFilter.mesh;
         FindHoleVertices();
     }
 
     private void Update()
     {
+        if (!Game.IsHole) return;
         var horizontalInput = joystick.Horizontal;
         var verticalInput = joystick.Vertical;
         var moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
@@ -45,15 +43,15 @@ public class HoleMovement : MonoBehaviour
        
         if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
         {
-            Game.isMoving = true;
+            Game.IsMoving = true;
         }
         else
         {
-            Game.isMoving = false;
+            Game.IsMoving = false;
         }
         
 
-        if (!Game.isGameover && Game.isMoving)
+        if (!Game.IsGameOver && Game.IsMoving)
         {
             MovePlayer(moveDirection);
             UpdateHoleVerticesPosition();
@@ -62,7 +60,7 @@ public class HoleMovement : MonoBehaviour
        
         ExpandHole();
 
-    
+
     }
 
     private void MovePlayer(Vector3 moveDirection)
@@ -85,9 +83,7 @@ public class HoleMovement : MonoBehaviour
 
         holeCenter.position = newPos;
 
-        var targetAngle = Mathf.Atan2(desiredMoveDirection.x, desiredMoveDirection.z) * Mathf.Rad2Deg;
-        holeFrame.rotation = Quaternion.RotateTowards(holeFrame.rotation, Quaternion.Euler(0f, targetAngle, 0f),
-            ROTATION_SPEED * Time.deltaTime);
+      
     }
   
 
@@ -96,9 +92,9 @@ public class HoleMovement : MonoBehaviour
         const float expansionAmount = 0.01f;
         const float expansionAmountForFrame = 0.1f;
 
-        for (var i = 0; i < holeVerticesCount; i++)
+        for (var i = 0; i < _holeVerticesCount; i++)
         {
-            offsets[i] += offsets[i].normalized * expansionAmount;
+            _offsets[i] += _offsets[i].normalized * expansionAmount;
         }
         holeFrame.localScale += new Vector3(expansionAmountForFrame,expansionAmountForFrame,expansionAmountForFrame);
         UpdateHoleVerticesPosition();
@@ -107,29 +103,29 @@ public class HoleMovement : MonoBehaviour
 
     private void UpdateHoleVerticesPosition()
     {
-        var vertices = mesh.vertices;
-        for (var i = 0; i < holeVerticesCount; i++)
+        var vertices = _mesh.vertices;
+        for (var i = 0; i < _holeVerticesCount; i++)
         {
-            vertices[holeVertices[i]] = holeCenter.position + offsets[i];
+            vertices[_holeVertices[i]] = holeCenter.position + _offsets[i];
         }
 
-        mesh.vertices = vertices;
-        meshFilter.mesh = mesh;
-        meshCollider.sharedMesh = mesh;
+        _mesh.vertices = vertices;
+        meshFilter.mesh = _mesh;
+        meshCollider.sharedMesh = _mesh;
     }
 
     private void FindHoleVertices()
     {
-        for (var i = 0; i < mesh.vertices.Length; i++)
+        for (var i = 0; i < _mesh.vertices.Length; i++)
         {
-            var distance = Vector3.Distance(holeCenter.position, mesh.vertices[i]);
+            var distance = Vector3.Distance(holeCenter.position, _mesh.vertices[i]);
 
             if (!(distance < radius)) continue;
-            holeVertices.Add(i);
-            offsets.Add(mesh.vertices[i] - holeCenter.position);
+            _holeVertices.Add(i);
+            _offsets.Add(_mesh.vertices[i] - holeCenter.position);
         }
 
-        holeVerticesCount = holeVertices.Count;
+        _holeVerticesCount = _holeVertices.Count;
     }
 
 

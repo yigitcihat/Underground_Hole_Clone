@@ -31,7 +31,7 @@ public class Magnet : MonoBehaviour
 
 	private void FixedUpdate ()
 	{
-		if (Game.isGameover || !Game.isMoving) return;
+		if (Game.IsGameOver || !Game.IsMoving) return;
 		foreach (Rigidbody rb in affectedRigidbodies) {
 			rb.AddForce ((magnet.position - rb.position) * magnetForce * Time.fixedDeltaTime);
 		}
@@ -41,7 +41,7 @@ public class Magnet : MonoBehaviour
 	{
 		var tag = other.tag;
 
-		if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
+		if (!Game.IsGameOver && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
 			AddToMagnetField (other.attachedRigidbody);
 		}
 	}
@@ -50,7 +50,7 @@ public class Magnet : MonoBehaviour
 	{
 		var tag = other.tag;
 
-		if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
+		if (!Game.IsGameOver && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
 			RemoveFromMagnetField (other.attachedRigidbody);
 		}
 	}

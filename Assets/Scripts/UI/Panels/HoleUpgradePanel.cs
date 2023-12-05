@@ -19,4 +19,11 @@ public class HoleUpgradePanel : HcbPanel
         yield return new WaitForSeconds(1f);
         ShowPanel();
     }
+
+    public override void HidePanel()
+    {
+        base.HidePanel();
+        Game.IsHole = true;
+        
+    }
 }
