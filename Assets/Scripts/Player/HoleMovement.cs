@@ -59,7 +59,7 @@ public class HoleMovement : MonoBehaviour
             UpdateHoleVerticesPosition();
         }
         if (!Input.GetKeyDown(KeyCode.Space)) return;
-        Debug.Log("ExpandHole");
+       
         ExpandHole();
 
     
@@ -94,12 +94,13 @@ public class HoleMovement : MonoBehaviour
     private void ExpandHole()
     {
         const float expansionAmount = 0.01f;
+        const float expansionAmountForFrame = 0.1f;
 
         for (var i = 0; i < holeVerticesCount; i++)
         {
             offsets[i] += offsets[i].normalized * expansionAmount;
         }
-        holeFrame.localScale += new Vector3(expansionAmount,expansionAmount,expansionAmount);
+        holeFrame.localScale += new Vector3(expansionAmountForFrame,expansionAmountForFrame,expansionAmountForFrame);
         UpdateHoleVerticesPosition();
     }
     

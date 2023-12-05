@@ -8,6 +8,7 @@ using UnityEngine;
         private Animator _animator;
         private Rigidbody _rb;
         private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        internal bool isMoving;
 
         // private void OnEnable()
         // {
@@ -42,16 +43,20 @@ using UnityEngine;
                 var newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0.0f, moveDirection.z));
                 _rb.rotation = Quaternion.Slerp(_rb.rotation, newRotation, Time.deltaTime * 10.0f);
 
-                _animator.SetBool(IsRunning, true);
+                isMoving = true;
+                _animator.SetBool(IsRunning, isMoving);
               
+
             }
             else
             {
-                _animator.SetBool(IsRunning, false);
+                isMoving = false;
+                _animator.SetBool(IsRunning, isMoving);
               
             }
         }
 
+       
         private void UpgradePlayerSpeed()
         {
             moveSpeed *= 1.05f;
