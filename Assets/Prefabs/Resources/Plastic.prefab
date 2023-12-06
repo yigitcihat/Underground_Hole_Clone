@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5496719746368979608}
   - component: {fileID: 5496719746368979591}
   - component: {fileID: 5496719746368979588}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: Plastic
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  myScaleAnim: {fileID: 0}
+  toFollow: {fileID: 0}
+  duration: 0
+  posY: 0
+  offSet: {x: 0, y: 0, z: 0}
+  isTriggerOpen: 1
+  isCollected: 0

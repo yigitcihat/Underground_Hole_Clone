@@ -12,8 +12,10 @@ public enum GameEvent
     OnCharacterUpgrade,
     OnUpgradeTimer,
     OnHoleUpgrade,
+    OnCapacityUpgrade,
     OnMoneyCollect,
     OnLevelDataChange,
+    OnCapacityFull,
     LevelFail,
     OnPlayerDataChange
 }
