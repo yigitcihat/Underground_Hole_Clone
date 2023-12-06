@@ -10,6 +10,7 @@ public static class HcbPanelList
     public static string CharacterUpgradePanel = "CharacterUpgradePanel";
     public static string HoleUpgradePanel = "HoleUpgradePanel";
     public static string LevelLoadingPanel = "LevelLoadingPanel";
+    public static string FullText = "FullText";
 
     public static Dictionary<string, HcbPanel> HcbPanels = new Dictionary<string, HcbPanel>();
 

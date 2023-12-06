@@ -10,19 +10,19 @@ using UnityEngine;
         private static readonly int IsRunning = Animator.StringToHash("IsRunning");
         internal bool isMoving;
 
-        // private void OnEnable()
-        // {
-        //     EventManager.AddListener(GameEvent.OnSpeedUpgrade, UpgradePlayerSpeed);
-        // }
-        //
-        // private void OnDisable()
-        // {
-        //     EventManager.RemoveListener(GameEvent.OnSpeedUpgrade, UpgradePlayerSpeed);
-        // }
+        private void OnEnable()
+        {
+            EventManager.AddListener(GameEvent.OnCharacterSpeedUpgrade, UpgradePlayerSpeed);
+        }
+        
+        private void OnDisable()
+        {
+            EventManager.RemoveListener(GameEvent.OnCharacterSpeedUpgrade, UpgradePlayerSpeed);
+        }
 
         private void Start()
         {
-            moveSpeed = PlayerPrefs.GetFloat("PlayerSpeed", moveSpeed);
+            moveSpeed = PlayerPrefs.GetFloat(PlayerPrefKeys.PlayerSpeed, moveSpeed);
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
         }
@@ -61,7 +61,7 @@ using UnityEngine;
         private void UpgradePlayerSpeed()
         {
             moveSpeed *= 1.05f;
-            PlayerPrefs.SetFloat("PlayerSpeed", moveSpeed);
-            moveSpeed = PlayerPrefs.GetFloat("PlayerSpeed", 10);
+            PlayerPrefs.SetFloat(PlayerPrefKeys.PlayerSpeed, moveSpeed);
+            moveSpeed = PlayerPrefs.GetFloat(PlayerPrefKeys.PlayerSpeed, 2);
         }
     }

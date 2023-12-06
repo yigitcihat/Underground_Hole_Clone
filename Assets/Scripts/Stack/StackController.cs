@@ -12,7 +12,7 @@ public class StackController : MonoBehaviour
     public Transform previousObject;
     public Transform lastObject;
     public Transform stackParent;
-    public int stackLimit;
+    private int stackLimit =25;
     public int ironCount = 0, woodCount = 0, plasticCount = 0;
     public List<GameObject> collectableList;
     public List<GameObject> ironList;
@@ -21,7 +21,7 @@ public class StackController : MonoBehaviour
 
 
     Vector3 _stackDirection;
-    public float stackSpeed = 3f;
+    public float stackSpeed = 10f;
     public float stackSpacing = 0.1f;
 
     private void OnValidate()
@@ -41,9 +41,8 @@ public class StackController : MonoBehaviour
 
     private void Awake()
     {
-        stackSpeed = PlayerPrefs.GetFloat("PlayerSpeed", 10);
-        stackLimit = PlayerPrefs.GetInt("StackLimit", 10);
         Instance = this;
+        stackLimit = PlayerPrefs.GetInt(PlayerPrefKeys.StackLimit, stackLimit);
     }
 
 
@@ -55,7 +54,11 @@ public class StackController : MonoBehaviour
 
     public void PickUpItem(Transform pickedObject)
     {
-        if (stackAmount>= stackLimit) return;
+        if (stackAmount >= stackLimit)
+        {
+            EventManager.Broadcast(GameEvent.OnCapacityFull);
+            return;
+        }
         _displacements.Add(Vector3.zero);
         pickedObject.GetComponent<Rigidbody>().useGravity = false;
         stackList.Add(pickedObject);
@@ -94,8 +97,8 @@ public class StackController : MonoBehaviour
 
     private void UpgradeStackLimit()
     {
-        stackLimit += 2;
-        PlayerPrefs.SetInt("StackLimit", stackLimit);
+        stackLimit += 5;
+        PlayerPrefs.SetInt(PlayerPrefKeys.StackLimit, stackLimit);
     }
 
 }

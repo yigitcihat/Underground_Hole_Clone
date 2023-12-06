@@ -7,13 +7,8 @@ public class Resource : MonoBehaviour
 {
     public ResourceTypes type;
 
-    private void OnEnable()
-    {
-        isTriggerOpen = true;
-        GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<Collider>().isTrigger = false;
-    }
-
+    private Rigidbody _rb;
+  
     public Transform toFollow;
     public float duration;
     public float posY;
@@ -24,9 +19,17 @@ public class Resource : MonoBehaviour
 
     private Vector3 _startScale;
     private int _collectedIndex = 0;
-    private void Start()
+    
+    private void OnEnable()
+    {
+        isTriggerOpen = true;
+        _rb.useGravity = true;
+    }
+
+    private void Awake()
     {
         _startScale = transform.localScale;
+        _rb = GetComponent<Rigidbody>();
     }
     
     private void Update()
@@ -34,6 +37,18 @@ public class Resource : MonoBehaviour
         if (!isCollected) return;
         var followPos = new Vector3(toFollow.position.x, posY, toFollow.position.z) + offSet;
         transform.position = Vector3.Lerp(transform.position,followPos,duration);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
+        var moneyObject = PoolingSystem.Instance.InstantiateAPS("MoneyText", transform.position);
+        var moneyAnim = moneyObject.GetComponent<MoneyAnimation>();
+
+        if (moneyAnim)
+        {
+            moneyAnim.EarnMoney(1);
+        }
     }
 
     public void Collect(Transform stackPos,int collectIndex,int listCount)

@@ -1,18 +1,43 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class FullText : MonoBehaviour
+public class FullText : HcbPanel
 {
-    
-    private void Start()
+    private bool _isActive;
+    private CanvasGroup _canvasGroup;
+
+    private void Awake()
     {
-        StartCoroutine(AutoDisable());
+        _canvasGroup = GetComponent<CanvasGroup>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.AddListener(GameEvent.OnCapacityFull,ActivateFullText);
+    }
 
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(GameEvent.OnCapacityFull,ActivateFullText);
+    }
+    
+
+
+    private void ActivateFullText()
+    {
+        if (_isActive)
+            return;
+        _isActive = true;
+        ShowPanel();
+        StartCoroutine(AutoDisable());
+    }
     private IEnumerator AutoDisable()
     {
         yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
+        HidePanel();
+        _isActive = false;
+        
+       
     }
 }
