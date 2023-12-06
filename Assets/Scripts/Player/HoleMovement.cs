@@ -35,7 +35,7 @@ public class HoleMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!Game.IsHole) return;
+        if (!Game.IsHole ||  !Game.IsGameStart) return;
         var horizontalInput = joystick.Horizontal;
         var verticalInput = joystick.Vertical;
         var moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;

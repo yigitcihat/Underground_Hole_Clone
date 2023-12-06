@@ -29,7 +29,7 @@ using UnityEngine;
 
         private void Update()
         {
-            if (Game.IsHole) return;
+            if (Game.IsHole || !Game.IsGameStart) return;
             var horizontalInput = joystick.Horizontal;
             var verticalInput = joystick.Vertical;
 

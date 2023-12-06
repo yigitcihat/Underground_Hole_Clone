@@ -7,7 +7,7 @@ public class StackController : MonoBehaviour
     public static StackController Instance;
 
     [Header("Stack Variables")] public List<Transform> stackList = new List<Transform>();
-    private List<Vector3> _displacements = new List<Vector3>();
+    internal List<Vector3> _displacements = new List<Vector3>();
     public int stackAmount;
     public Transform previousObject;
     public Transform lastObject;
@@ -58,6 +58,24 @@ public class StackController : MonoBehaviour
         {
             EventManager.Broadcast(GameEvent.OnCapacityFull);
             return;
+        }
+
+        var resource = pickedObject.GetComponent<Resource>();
+        switch (resource.type)
+        {
+            case ResourceTypes.Iron:
+                ironCount++;
+                ironList.Add(resource.gameObject);
+                break;
+            case ResourceTypes.Plastic:
+                plasticCount++;
+                plasticList.Add(resource.gameObject);
+                break;
+            case ResourceTypes.Wood:
+                woodCount++;
+                woodList.Add(resource.gameObject);
+                break;
+            
         }
         _displacements.Add(Vector3.zero);
         pickedObject.GetComponent<Rigidbody>().useGravity = false;

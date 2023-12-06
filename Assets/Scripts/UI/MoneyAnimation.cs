@@ -12,7 +12,7 @@ public class MoneyAnimation : MonoBehaviour
         EventsSystem.OnCurrencyInteracted.Invoke(money);
         var moneyText = GetComponent<TextMeshPro>();
         moneyText.text = $"${money}";
-        transform.DOMove(currentPos + new Vector3(0, 2, 0), 0.5f);
+        transform.DOMove(currentPos + new Vector3(0, 1, 0), 0.5f);
         transform.DOScale((currentScale * 1.5f), 0.6f).OnComplete(() =>
         {
             PoolingSystem.Instance.DestroyAPS(gameObject);

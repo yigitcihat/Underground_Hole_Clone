@@ -12,6 +12,7 @@ public class PlayerInteractions : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (Game.IsHole) return;
         var isCollectable = other.CompareTag("Collectable");
 
         if (isCollectable)

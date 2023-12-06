@@ -19,6 +19,12 @@ public class InGamePanel : HcbPanel
 
     }
 
+    public override void ShowPanel()
+    {
+        base.ShowPanel();
+        Game.IsGameStart = true;
+    }
+
     private void ActivateFullText()
     {
         if (fullText.isActiveAndEnabled) return;

@@ -30,7 +30,7 @@ public class CountdownTimer : MonoBehaviour
 
     private void Update()
     {
-        if (!Game.IsHole) return;
+        if (!Game.IsHole || !Game.IsGameStart) return;
         if (_currentTime > 0)
         {
             _currentTime -= Time.deltaTime;

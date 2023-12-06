@@ -7,7 +7,7 @@ public class FullText : HcbPanel
     private bool _isActive;
     private CanvasGroup _canvasGroup;
 
-    private void Awake()
+    protected override void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
     }
