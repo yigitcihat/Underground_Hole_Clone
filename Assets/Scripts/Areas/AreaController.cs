@@ -35,6 +35,7 @@ public class AreaController : MonoBehaviour
 
     private void OpenNewAreas()
     {
+        Debug.Log("fasfas");
         _unlockedBuildingCount++;
         PlayerPrefs.SetInt(PlayerPrefKeys.UnlockedBuildCount, _unlockedBuildingCount);
         SetLevel();

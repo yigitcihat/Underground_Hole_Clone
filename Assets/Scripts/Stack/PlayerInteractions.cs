@@ -1,11 +1,8 @@
-﻿using System;
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    [SerializeField]private SphereCollider collider;
+    [SerializeField]private SphereCollider _sphereCollider;
 
     private float _radius;
 
@@ -22,14 +19,15 @@ public class PlayerInteractions : MonoBehaviour
     private void Awake()
     {
         _radius = PlayerPrefs.GetFloat(PlayerPrefKeys.MagnetRadius, 1);
-        collider.radius = _radius;
+        _sphereCollider = GetComponentInChildren<SphereCollider>();
+        _sphereCollider.radius = _radius;
     }
 
     private void UpgradeMagnetRadius()
     {
         _radius *= 1.2f;
         PlayerPrefs.SetFloat(PlayerPrefKeys.MagnetRadius, _radius);
-        collider.radius = _radius;
+        _sphereCollider.radius = _radius;
     }
 
     public void OnTriggerEnter(Collider other)

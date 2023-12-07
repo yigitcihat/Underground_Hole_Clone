@@ -8038,7 +8038,6 @@ GameObject:
   m_Component:
   - component: {fileID: 263138105}
   - component: {fileID: 263138104}
-  - component: {fileID: 263138106}
   m_Layer: 0
   m_Name: Farmville_Cam
   m_TagString: Untagged
@@ -8100,18 +8099,6 @@ Transform:
   m_Father: {fileID: 413495891}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 51.9, y: 0, z: 0}
---- !u!114 &263138106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263138103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &268805200
 GameObject:
   m_ObjectHideFlags: 0
@@ -9207,7 +9194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 306874787}
   - component: {fileID: 306874786}
-  - component: {fileID: 306874785}
   m_Layer: 0
   m_Name: WindTurbine2_Cam
   m_TagString: Untagged
@@ -9215,18 +9201,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &306874785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306874784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &306874786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11682,7 +11656,6 @@ GameObject:
   m_Component:
   - component: {fileID: 479981443}
   - component: {fileID: 479981442}
-  - component: {fileID: 479981441}
   m_Layer: 0
   m_Name: WindTurbine_Cam
   m_TagString: Untagged
@@ -11690,18 +11663,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &479981441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479981440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &479981442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12351,7 +12312,6 @@ GameObject:
   m_Component:
   - component: {fileID: 516881016}
   - component: {fileID: 516881015}
-  - component: {fileID: 516881014}
   m_Layer: 0
   m_Name: Mill_Cam
   m_TagString: Untagged
@@ -12359,18 +12319,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &516881014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516881013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &516881015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22304,7 +22252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 845981016}
   - component: {fileID: 845981015}
-  - component: {fileID: 845981014}
   m_Layer: 0
   m_Name: NuclearStation_Cam
   m_TagString: Untagged
@@ -22312,18 +22259,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &845981014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845981013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &845981015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22800,7 +22735,6 @@ GameObject:
   m_Component:
   - component: {fileID: 892525467}
   - component: {fileID: 892525466}
-  - component: {fileID: 892525465}
   m_Layer: 0
   m_Name: WaterTank_Cam
   m_TagString: Untagged
@@ -22808,18 +22742,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &892525465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 892525464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &892525466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29956,6 +29878,11 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &1392644953 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 1392644951, guid: 08a2dc8c0d0ab7e46bc3a81db0f36ee0, type: 3}
+  m_PrefabInstance: {fileID: 8074481206496411153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1395586022
 GameObject:
   m_ObjectHideFlags: 0
@@ -32287,7 +32214,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1557600343}
   - component: {fileID: 1557600342}
-  - component: {fileID: 1557600341}
   m_Layer: 0
   m_Name: Forest_Cam
   m_TagString: Untagged
@@ -32295,18 +32221,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1557600341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557600340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1557600342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38355,7 +38269,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1940448448}
   - component: {fileID: 1940448447}
-  - component: {fileID: 1940448446}
   m_Layer: 0
   m_Name: TermalStation_Cam
   m_TagString: Untagged
@@ -38363,18 +38276,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1940448446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940448445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475b2369428592b4eb4b9360f9d2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1940448447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66729,6 +66630,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1210761813}
+    - target: {fileID: 8794116009088343818, guid: 08a2dc8c0d0ab7e46bc3a81db0f36ee0, type: 3}
+      propertyPath: _sphereCollider
+      value: 
+      objectReference: {fileID: 1392644953}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08a2dc8c0d0ab7e46bc3a81db0f36ee0, type: 3}
 --- !u!1 &8095957387730689562
@@ -67094,7 +66999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822254b5c68ae464eb28628c410b7592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1392644951}
+  _sphereCollider: {fileID: 0}
 --- !u!114 &8794116009088343819
 MonoBehaviour:
   m_ObjectHideFlags: 0
