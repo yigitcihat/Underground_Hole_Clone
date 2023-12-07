@@ -36,6 +36,7 @@ public class Area : MonoBehaviour
         if (_isUnlocked)
         {
             UnlockArea();
+           
         }
         else
         {
@@ -46,6 +47,9 @@ public class Area : MonoBehaviour
 
             _totalMaterial = requiredIron + requiredWood + requiredPlastic;
         }
+
+        SetRequirements();
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -64,18 +68,19 @@ public class Area : MonoBehaviour
     private IEnumerator ActivateAvailable(StackController stackController)
     {
         _isCoroutineRunning = true;
-        for (var i = 0; i < _currentIron; i++)
+
+        // Handle iron materials
+        for (var i = 0; i < _currentIron && stackController.ironList.Count > 0; i++)
         {
-            if (stackController.woodList.Count <= 0 || ironTMP == null || _currentIron <= 0 ||
-                stackController.ironCount <= 0) break;
             var material = stackController.ironList[0];
             stackController.stackList.Remove(material.transform);
             stackController.ironList.RemoveAt(0);
             material.transform.SetParent(null, true);
 
             if (ironTMP == null) break;
+
             material.transform.DOMove(ironTMP.transform.position, 0.1f);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
 
             PoolingSystem.Instance.DestroyAPS(material.gameObject);
 
@@ -84,10 +89,8 @@ public class Area : MonoBehaviour
             stackController.ironCount--;
         }
 
-        for (var i = 0; i < _currentWood; i++)
+        for (var i = 0; i < _currentWood && stackController.woodList.Count > 0; i++)
         {
-            if (stackController.woodList.Count <= 0 || woodTMP == null || _currentWood <= 0 ||
-                stackController.woodCount <= 0) break;
             var material = stackController.woodList[0];
             stackController.stackList.Remove(material.transform);
             stackController.woodList.RemoveAt(0);
@@ -96,7 +99,7 @@ public class Area : MonoBehaviour
             if (woodTMP == null) break;
 
             material.transform.DOMove(woodTMP.transform.position, 0.1f);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
 
             PoolingSystem.Instance.DestroyAPS(material.gameObject);
 
@@ -105,10 +108,8 @@ public class Area : MonoBehaviour
             stackController.woodCount--;
         }
 
-        for (var i = 0; i < _currentPlastic; i++)
+        for (var i = 0; i < _currentPlastic && stackController.plasticList.Count > 0; i++)
         {
-            if (stackController.plasticList.Count <= 0 || plasticTMP == null || _currentPlastic <= 0 ||
-                stackController.plasticCount <= 0) break;
             var material = stackController.plasticList[0];
             stackController.stackList.Remove(material.transform);
             stackController.plasticList.RemoveAt(0);
@@ -117,7 +118,7 @@ public class Area : MonoBehaviour
             if (plasticTMP == null) break;
 
             material.transform.DOMove(plasticTMP.transform.position, 0.1f);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
 
             PoolingSystem.Instance.DestroyAPS(material.gameObject);
 
@@ -129,6 +130,7 @@ public class Area : MonoBehaviour
         if (_totalMaterial <= 0)
         {
             UnlockArea();
+            EventManager.Broadcast(GameEvent.OnNewBuildingUnlock);
         }
 
         _isCoroutineRunning = false;
@@ -144,7 +146,6 @@ public class Area : MonoBehaviour
         {
             ironTMP.text = requiredIron.ToString();
             if (requiredIron == 0) Destroy(ironTMP.transform.parent.gameObject);
-           
         }
 
         if (woodTMP is not null)
@@ -167,11 +168,20 @@ public class Area : MonoBehaviour
         radialBar.transform.parent.gameObject.SetActive(false);
         areaLineSquare.gameObject.SetActive(false);
         building.SetActive(true);
+        
+    }
+
+    private void SetRequirements()
+    {
+        Game.RequiredIron += requiredIron;
+        Game.RequiredPlastic += requiredPlastic;
+        Game.RequiredWood += requiredWood;
     }
 
     private void AddIron(int amount)
     {
         _currentIron -= amount;
+        Game.RequiredIron -= amount;
         PlayerPrefs.SetInt($"{name}_requiredIron", _currentIron);
         ironTMP.text = _currentIron.ToString();
         _totalMaterial -= amount;
@@ -189,6 +199,7 @@ public class Area : MonoBehaviour
     private void AddWood(int amount)
     {
         _currentWood -= amount;
+        Game.RequiredWood -= amount;
         PlayerPrefs.SetInt($"{name}_requiredWood", _currentWood);
         woodTMP.text = _currentWood.ToString();
         _totalMaterial -= amount;
@@ -206,6 +217,7 @@ public class Area : MonoBehaviour
     private void AddPlastic(int amount)
     {
         _currentPlastic -= amount;
+        Game.RequiredPlastic -= amount;
         PlayerPrefs.SetInt($"{name}_requiredPlastic", _currentPlastic);
         plasticTMP.text = _currentPlastic.ToString();
         _totalMaterial -= amount;
@@ -218,27 +230,5 @@ public class Area : MonoBehaviour
         {
             Destroy(plasticTMP.transform.parent.gameObject);
         }
-    }
-
-
-    private void RemoveRequiredIron()
-    {
-        _currentIron -= requiredIron;
-        if (_currentIron < 0)
-        {
-            _currentIron = 0;
-        }
-    }
-
-    private void TryUnlock()
-    {
-        if (_isUnlocked || !HasRequiredResources()) return;
-        RemoveRequiredIron();
-        UnlockArea();
-    }
-
-    private bool HasRequiredResources()
-    {
-        return _currentIron <= 0 && _currentWood <= 0 && _currentPlastic <= 0;
     }
 }

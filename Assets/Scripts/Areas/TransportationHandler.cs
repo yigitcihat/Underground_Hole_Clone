@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TransportationHandler : MonoBehaviour
 {
     [SerializeField] private Image radialBar;
+    [SerializeField] private ParticleSystem trasportParticule;
     private const float COMPLETE_TIME = 2f;
     private float _timer;
     private PlayerMovement player;
@@ -15,6 +16,7 @@ public class TransportationHandler : MonoBehaviour
         player = other.GetComponent<PlayerMovement>();
         if (player == null) return;
         _isCharacterInTransportArea = true;
+        trasportParticule.Play();
     }
 
     private void OnTriggerExit(Collider other)
@@ -23,6 +25,7 @@ public class TransportationHandler : MonoBehaviour
         if (player == null) return;
         _isCharacterInTransportArea = false;
         _timer = 0;
+        trasportParticule.Stop();
 
     }
 
@@ -42,6 +45,8 @@ public class TransportationHandler : MonoBehaviour
                 EventManager.Broadcast(GameEvent.OnTransportTopStage);
                 _isCharacterInTransportArea = false;
                 radialBar.fillAmount = 0;
+                trasportParticule.Stop();
+                
             }
             
           

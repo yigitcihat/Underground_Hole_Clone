@@ -19,15 +19,23 @@ public class Resource : MonoBehaviour
 
     private Vector3 _startScale;
     private int _collectedIndex = 0;
-    
+    private Camera _camera;
     private void OnEnable()
     {
         isTriggerOpen = true;
         _rb.useGravity = true;
+        tag = "Collectable";
+        Game.CreatedResources.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        Game.CreatedResources.Remove(this);
     }
 
     private void Awake()
     {
+        _camera= Camera.main;
         _startScale = transform.localScale;
         _rb = GetComponent<Rigidbody>();
     }
@@ -37,6 +45,7 @@ public class Resource : MonoBehaviour
         if (!isCollected) return;
         var followPos = new Vector3(toFollow.position.x, posY, toFollow.position.z) + offSet;
         transform.position = Vector3.Lerp(transform.position,followPos,duration);
+        transform.LookAt(_camera.transform.position);
     }
 
     private void OnCollisionEnter(Collision other)

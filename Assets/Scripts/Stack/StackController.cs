@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -32,11 +34,13 @@ public class StackController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener(GameEvent.OnCapacityUpgrade, UpgradeStackLimit);
+        EventManager.AddListener(GameEvent.OnTransportTopStage,()=>StartCoroutine(LeftAllResources()));
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener(GameEvent.OnCapacityUpgrade, UpgradeStackLimit);
+        EventManager.RemoveListener(GameEvent.OnTransportTopStage,()=>StartCoroutine(LeftAllResources()));
     }
 
     private void Awake()
@@ -117,6 +121,29 @@ public class StackController : MonoBehaviour
     {
         stackLimit += 5;
         PlayerPrefs.SetInt(PlayerPrefKeys.StackLimit, stackLimit);
+    }
+
+    private IEnumerator LeftAllResources()
+    {
+        ironList.Clear();
+        woodList.Clear();
+        plasticList.Clear();
+        var stackListCount = stackList.Count;
+        for (var i = 0; i < stackListCount; i++)
+        {
+            var stack = stackList[0];
+            stackList.RemoveAt(0);
+            stack.SetParent(null,true);
+            var rb = stack.GetComponent<Rigidbody>();
+            var randomPos = new Vector3(Random.Range(-2,2),0,Random.Range(2f,6f)) ;
+            stack.DOJump(transform.position + randomPos, 2f, 1, 0.1f).OnComplete(() =>
+            {
+                stack.tag = "Collectable";
+            });
+            yield return new WaitForSeconds(0.1f);
+
+
+        }
     }
 
 }

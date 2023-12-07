@@ -7,18 +7,13 @@ public enum GameEvent
     OnTransportTopStage,
     OnTransportBottomStage,
     OnLevelFinish,
-    OnNavmeshSurfaceUpdate,
-    NewZoneActivated,
     OnCharacterUpgrade,
     OnUpgradeTimer,
     OnHoleUpgrade,
     OnCapacityUpgrade,
     OnCharacterSpeedUpgrade,
-    OnMoneyCollect,
-    OnLevelDataChange,
     OnCapacityFull,
-    LevelFail,
-    OnPlayerDataChange
+    OnNewBuildingUnlock,
 }
 
 public static class EventManager
