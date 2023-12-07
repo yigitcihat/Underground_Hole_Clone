@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class HoleMovement : MonoBehaviour
@@ -22,7 +21,7 @@ public class HoleMovement : MonoBehaviour
     private Mesh _mesh;
     private List<int> _holeVertices;
     private List<Vector3> _offsets;
-    private int _holeVerticesCount;
+    private int _holeVerticesCount,radiusCount;
     private const float ROTATION_SPEED = 500;
     private Vector3 _startPosition;
     private List<Vector3> _initialVertexPositions;
@@ -52,6 +51,10 @@ public class HoleMovement : MonoBehaviour
         _initialVertexPositions = new List<Vector3>(_mesh.vertices);
         FindHoleVertices();
         moveSpeed = PlayerPrefs.GetFloat(PlayerPrefKeys.HoleSpeed, moveSpeed);
+        radiusCount = PlayerPrefs.GetInt(PlayerPrefKeys.HoleRadius, 0);
+
+        LoadRadius();
+        
     }
 
     private void Update()
@@ -78,9 +81,8 @@ public class HoleMovement : MonoBehaviour
             UpdateHoleVerticesPosition();
         }
 
-        if (!Input.GetKeyDown(KeyCode.Space)) return;
     }
-
+    
     private void MovePlayer(Vector3 moveDirection)
     {
         var forward = Camera.main.transform.forward;
@@ -102,6 +104,13 @@ public class HoleMovement : MonoBehaviour
         holeCenter.position = newPos;
     }
 
+    private void LoadRadius()
+    {
+        for (var i = 0; i < radiusCount; i++)
+        {
+            UpgradeHoleRadius();
+        }
+    }
 
     private void UpgradeHoleRadius()
     {
@@ -114,6 +123,9 @@ public class HoleMovement : MonoBehaviour
         }
 
         holeFrame.localScale += new Vector3(expansionAmountForFrame, expansionAmountForFrame, expansionAmountForFrame);
+
+        radiusCount++;
+        PlayerPrefs.SetInt(PlayerPrefKeys.HoleRadius,radiusCount);
         UpdateHoleVerticesPosition();
     }
 
@@ -154,9 +166,10 @@ public class HoleMovement : MonoBehaviour
             _offsets[i] = _initialVertexPositions[_holeVertices[i]] - holeCenter.position;
         }
 
-        _mesh.vertices = _mesh.vertices; // Unity'ye güncelleme bildir
+        _mesh.vertices = _mesh.vertices; 
 
         UpdateHoleVerticesPosition();
+        LoadRadius();
     }
 
     private void UpgradeSpeed()
