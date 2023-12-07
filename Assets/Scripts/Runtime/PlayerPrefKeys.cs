@@ -8,4 +8,5 @@ public static class PlayerPrefKeys
     public static readonly string PlayerSpeed = "PlayerSpeed";
     public static readonly string UnlockedBuildCount = "UnlockedBuildCount";
     public static readonly string Level = "Level";
+    public static readonly string MagnetRadius = "MagnetRadius";
 }

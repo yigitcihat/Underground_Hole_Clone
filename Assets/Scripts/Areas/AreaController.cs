@@ -83,7 +83,6 @@ public class AreaController : MonoBehaviour
 
     private void UnlockNewAreas(int level)
     {
-        Debug.Log("UnlockNewArea");
         for (var i = 0; i < levels[level].childCount; i++)
         {
             levels[level].GetChild(i).gameObject.SetActive(true);

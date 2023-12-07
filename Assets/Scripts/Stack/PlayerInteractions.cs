@@ -1,14 +1,36 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    // [SerializeField] private Transform moneyText;
-    // [SerializeField] private Transform canvas;
-    // private Animator Animator => GetComponent<Animator>();
-    // private float _timer;
-    // private float _interval = 0.1f;
+    [SerializeField]private SphereCollider collider;
+
+    private float _radius;
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(GameEvent.OnMagnetUpgrade,UpgradeMagnetRadius);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(GameEvent.OnMagnetUpgrade,UpgradeMagnetRadius);
+    }
+
+    private void Awake()
+    {
+        _radius = PlayerPrefs.GetFloat(PlayerPrefKeys.MagnetRadius, 1);
+        collider.radius = _radius;
+    }
+
+    private void UpgradeMagnetRadius()
+    {
+        _radius *= 1.2f;
+        PlayerPrefs.SetFloat(PlayerPrefKeys.MagnetRadius, _radius);
+        collider.radius = _radius;
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -22,39 +44,5 @@ public class PlayerInteractions : MonoBehaviour
         }
         
     }
-
- 
-    private void OnTriggerStay(Collider other)
-    {
-        //     var exchange = other.GetComponent<ExchangeZone>();
-        //
-        //     if (exchange)
-        //     {
-        //         if (StackController.Instance.stackList.Count > 0)
-        //         {
-        //             _timer += Time.deltaTime;
-        //             if (!(_timer >= _interval)) return;
-        //
-        //             var lastTokenIndex = StackController.Instance.stackList.Count;
-        //             var token = StackController.Instance.stackList[lastTokenIndex - 1].GetComponent<Resource>();
-        //             StackController.Instance.stackList.Remove(token.transform);
-        //             var money = PlayerPrefs.GetInt(PlayerPrefKeys.Money, 200);
-        //             // money += token.coinValue;
-        //
-        //             var targetPosition = moneyText.position;
-        //             var moneyUI = PoolingSystem.Instance.InstantiateAPS("MoneyUI", Vector3.zero);
-        //             moneyUI.transform.SetParent(canvas);
-        //             moneyUI.transform.localPosition = Vector3.zero;
-        //             PoolingSystem.Instance.DestroyAPS(token.gameObject);
-        //             moneyUI.transform.DOMove(targetPosition, 0.1f).OnComplete(() =>
-        //             {
-        //                 PoolingSystem.Instance.InstantiateAPS("SaleToken");
-        //                 moneyText.DOShakeScale(0.1f, 0.2f, 2, 20);
-        //                 PoolingSystem.Instance.DestroyAPS(moneyUI);
-        //             });
-        //             _timer = 0;
-        //         }
-        //     }
-        //   
-    }
+    
 }

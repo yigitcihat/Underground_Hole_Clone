@@ -45,7 +45,7 @@ public class Prop : MonoBehaviour
         var requiredWoodCount = Game.RequiredWood - woodCount;
         var requiredPlasticCount = Game.RequiredPlastic - plasticCount;
 
-        List<Func<ResourceTypes>> checkFunctions = new List<Func<ResourceTypes>>
+        var checkFunctions = new List<Func<ResourceTypes>>
         {
             () => requiredIronCount > 0 ? ResourceTypes.Iron : ResourceTypes.None,
             () => requiredWoodCount > 0 ? ResourceTypes.Wood : ResourceTypes.None,
@@ -65,9 +65,19 @@ public class Prop : MonoBehaviour
 
         var resourceTypes = Enum.GetValues(typeof(ResourceTypes));
         var randomIndex = new Random2().Next(resourceTypes.Length);
-        return (ResourceTypes)resourceTypes.GetValue(randomIndex);
+        var random = (ResourceTypes)resourceTypes.GetValue(randomIndex);
+        if (random != ResourceTypes.None)
+        {
+            return random;
+        }
+        else
+        {
+            return ResourceTypes.Iron;
+        }
 
 
-      
+
+
     }
+
 }

@@ -10,4 +10,5 @@ public static class Game
 	public static int RequiredIron;
 	public static int RequiredWood;
 	public static int RequiredPlastic;
+	public static int Money;
 }

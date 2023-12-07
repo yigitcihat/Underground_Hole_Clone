@@ -11,6 +11,7 @@ public enum GameEvent
     OnUpgradeTimer,
     OnHoleUpgrade,
     OnCapacityUpgrade,
+    OnMagnetUpgrade,
     OnCharacterSpeedUpgrade,
     OnCapacityFull,
     OnNewBuildingUnlock,

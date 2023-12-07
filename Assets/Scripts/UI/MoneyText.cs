@@ -10,6 +10,7 @@ public class MoneyText : MonoBehaviour
     {
         moneyText = GetComponent<TextMeshProUGUI>();
         currentMoney = PlayerPrefs.GetInt(PlayerPrefKeys.Money, 45);
+        Game.Money = currentMoney;
         moneyText.text = currentMoney.ToString();
     }
 
@@ -26,6 +27,7 @@ public class MoneyText : MonoBehaviour
     private void ChangeMoneyText(int money)
     {
         currentMoney += money;
+        Game.Money = currentMoney;
         PlayerPrefs.SetInt(PlayerPrefKeys.Money,currentMoney);
         moneyText.text = currentMoney.ToString();
     }
