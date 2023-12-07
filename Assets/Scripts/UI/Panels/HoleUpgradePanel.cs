@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HoleUpgradePanel : HcbPanel
 {
+    [SerializeField] private UpgradeSection radius;
+    [SerializeField] private UpgradeSection timer;
+    [SerializeField] private UpgradeSection speed;
     private void OnEnable()
     {
         EventManager.AddListener(GameEvent.OnTransportTopStage,()=>StartCoroutine(ShowPanelWithDelay()));
@@ -25,5 +28,26 @@ public class HoleUpgradePanel : HcbPanel
         base.HidePanel();
         Game.IsHole = true;
         
+    }
+    public void UpgradeHoleRadius()
+    {
+        EventsSystem.OnCurrencyInteracted.Invoke(-radius.cost);
+        EventManager.Broadcast(GameEvent.OnHoleRadiusUpgrade);
+        radius.Upgrade();
+        
+    }
+
+    public void UpgradeTime()
+    {
+        EventsSystem.OnCurrencyInteracted.Invoke(-timer.cost);
+        EventManager.Broadcast(GameEvent.OnHoleTimerUpgrade);
+        timer.Upgrade();
+    }
+
+    public void UpgradeHoleSpeed()
+    {
+        EventsSystem.OnCurrencyInteracted.Invoke(-speed.cost);
+        EventManager.Broadcast(GameEvent.OnHoleSpeedUpgrade);
+        speed.Upgrade();
     }
 }

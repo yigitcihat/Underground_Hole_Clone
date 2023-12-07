@@ -26,14 +26,19 @@ public class HoleMovement : MonoBehaviour
     private const float ROTATION_SPEED = 500;
     private Vector3 _startPosition;
     private List<Vector3> _initialVertexPositions;
+
     private void OnEnable()
     {
-        EventManager.AddListener(GameEvent.OnTransportBottomStage,ResetHolePosition);
+        EventManager.AddListener(GameEvent.OnTransportBottomStage, ResetHolePosition);
+        EventManager.AddListener(GameEvent.OnHoleSpeedUpgrade, UpgradeSpeed);
+        EventManager.AddListener(GameEvent.OnHoleRadiusUpgrade,UpgradeHoleRadius);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener(GameEvent.OnTransportBottomStage,ResetHolePosition);
+        EventManager.RemoveListener(GameEvent.OnTransportBottomStage, ResetHolePosition);
+        EventManager.RemoveListener(GameEvent.OnHoleSpeedUpgrade, UpgradeSpeed);
+        EventManager.RemoveListener(GameEvent.OnHoleRadiusUpgrade,UpgradeHoleRadius);
     }
 
     private void Start()
@@ -46,16 +51,17 @@ public class HoleMovement : MonoBehaviour
         _startPosition = transform.position;
         _initialVertexPositions = new List<Vector3>(_mesh.vertices);
         FindHoleVertices();
+        moveSpeed = PlayerPrefs.GetFloat(PlayerPrefKeys.HoleSpeed, moveSpeed);
     }
 
     private void Update()
     {
-        if (!Game.IsHole ||  !Game.IsGameStart) return;
+        if (!Game.IsHole || !Game.IsGameStart) return;
         var horizontalInput = joystick.Horizontal;
         var verticalInput = joystick.Vertical;
         var moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-        
-       
+
+
         if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
         {
             Game.IsMoving = true;
@@ -64,18 +70,15 @@ public class HoleMovement : MonoBehaviour
         {
             Game.IsMoving = false;
         }
-        
+
 
         if (!Game.IsGameOver && Game.IsMoving)
         {
             MovePlayer(moveDirection);
             UpdateHoleVerticesPosition();
         }
+
         if (!Input.GetKeyDown(KeyCode.Space)) return;
-       
-        ExpandHole();
-
-
     }
 
     private void MovePlayer(Vector3 moveDirection)
@@ -97,12 +100,10 @@ public class HoleMovement : MonoBehaviour
         newPos.z = Mathf.Clamp(newPos.z, minZ, maxZ);
 
         holeCenter.position = newPos;
-
-      
     }
-  
 
-    private void ExpandHole()
+
+    private void UpgradeHoleRadius()
     {
         const float expansionAmount = 0.01f;
         const float expansionAmountForFrame = 0.1f;
@@ -111,10 +112,11 @@ public class HoleMovement : MonoBehaviour
         {
             _offsets[i] += _offsets[i].normalized * expansionAmount;
         }
-        holeFrame.localScale += new Vector3(expansionAmountForFrame,expansionAmountForFrame,expansionAmountForFrame);
+
+        holeFrame.localScale += new Vector3(expansionAmountForFrame, expansionAmountForFrame, expansionAmountForFrame);
         UpdateHoleVerticesPosition();
     }
-    
+
 
     private void UpdateHoleVerticesPosition()
     {
@@ -142,6 +144,7 @@ public class HoleMovement : MonoBehaviour
 
         _holeVerticesCount = _holeVertices.Count;
     }
+
     private void ResetHolePosition()
     {
         holeCenter.position = _startPosition;
@@ -156,6 +159,9 @@ public class HoleMovement : MonoBehaviour
         UpdateHoleVerticesPosition();
     }
 
+    private void UpgradeSpeed()
+    {
+        moveSpeed *= 1.1f;
+        PlayerPrefs.SetFloat(PlayerPrefKeys.HoleSpeed, moveSpeed);
+    }
 }
-       
-        

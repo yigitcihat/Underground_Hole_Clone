@@ -2,5 +2,8 @@
 {
     MagnetRadius,
     StackCapacity,
-    CharacterSpeed
+    CharacterSpeed,
+    HoleRadius,
+    Timer,
+    HoleSpeed
 }

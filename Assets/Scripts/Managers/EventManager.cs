@@ -9,10 +9,12 @@ public enum GameEvent
     OnLevelFinish,
     OnCharacterUpgrade,
     OnUpgradeTimer,
-    OnHoleUpgrade,
     OnCapacityUpgrade,
     OnMagnetUpgrade,
     OnCharacterSpeedUpgrade,
+    OnHoleRadiusUpgrade,
+    OnHoleSpeedUpgrade,
+    OnHoleTimerUpgrade,
     OnCapacityFull,
     OnNewBuildingUnlock,
 }

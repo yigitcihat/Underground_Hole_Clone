@@ -9,4 +9,7 @@ public static class PlayerPrefKeys
     public static readonly string UnlockedBuildCount = "UnlockedBuildCount";
     public static readonly string Level = "Level";
     public static readonly string MagnetRadius = "MagnetRadius";
+    public static readonly string HoleRadius = "HoleRadius";
+    public static readonly string HoleSpeed = "HoleSpeed";
+    public static readonly string HoleTimer = "HoleTimer";
 }

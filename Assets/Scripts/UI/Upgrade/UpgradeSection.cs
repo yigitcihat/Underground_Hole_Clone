@@ -40,10 +40,10 @@ public class UpgradeSection : MonoBehaviour
     public void Upgrade()
     {
         level++;
-        PlayerPrefs.GetInt($"{type}_Level", level);
+        PlayerPrefs.SetInt($"{type}_Level", level);
         levelText.text = $"Lvl{level}";
         cost = (int)(cost * multiply);
-        PlayerPrefs.GetInt($"{type}_Cost", cost);
+        PlayerPrefs.SetInt($"{type}_Cost", cost);
         costText.text = $"${cost}";
 
     }

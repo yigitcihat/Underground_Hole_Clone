@@ -131,6 +131,7 @@ public class Area : MonoBehaviour
         {
             UnlockArea();
             EventManager.Broadcast(GameEvent.OnNewBuildingUnlock);
+            PoolingSystem.Instance.InstantiateAPS("SmokeExp", building.transform.position);
         }
 
         _isCoroutineRunning = false;
