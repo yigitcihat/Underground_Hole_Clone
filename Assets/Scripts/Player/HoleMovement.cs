@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HoleMovement : MonoBehaviour
@@ -23,6 +24,18 @@ public class HoleMovement : MonoBehaviour
     private List<Vector3> _offsets;
     private int _holeVerticesCount;
     private const float ROTATION_SPEED = 500;
+    private Vector3 _startPosition;
+    private List<Vector3> _initialVertexPositions;
+    private void OnEnable()
+    {
+        EventManager.AddListener(GameEvent.OnTransportBottomStage,ResetHolePosition);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener(GameEvent.OnTransportBottomStage,ResetHolePosition);
+    }
+
     private void Start()
     {
         Game.IsMoving = false;
@@ -30,6 +43,8 @@ public class HoleMovement : MonoBehaviour
         _holeVertices = new List<int>();
         _offsets = new List<Vector3>();
         _mesh = meshFilter.mesh;
+        _startPosition = transform.position;
+        _initialVertexPositions = new List<Vector3>(_mesh.vertices);
         FindHoleVertices();
     }
 
@@ -127,7 +142,19 @@ public class HoleMovement : MonoBehaviour
 
         _holeVerticesCount = _holeVertices.Count;
     }
+    private void ResetHolePosition()
+    {
+        holeCenter.position = _startPosition;
 
+        for (var i = 0; i < _holeVerticesCount; i++)
+        {
+            _offsets[i] = _initialVertexPositions[_holeVertices[i]] - holeCenter.position;
+        }
+
+        _mesh.vertices = _mesh.vertices; // Unity'ye güncelleme bildir
+
+        UpdateHoleVerticesPosition();
+    }
 
 }
        
