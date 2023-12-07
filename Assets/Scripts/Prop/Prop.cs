@@ -9,6 +9,16 @@ using System.Linq;
 public class Prop : MonoBehaviour
 {
     private bool _isDropping;
+    private bool _isDestroyed;
+    private void Awake()
+    {
+        PlayerPrefs.GetInt($"{gameObject.name}_isDestroy", 0);
+        _isDestroyed = PlayerPrefs.GetInt($"{gameObject.name}_isDestroy", 0) == 1;
+        if (_isDestroyed)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +42,7 @@ public class Prop : MonoBehaviour
         var rb = PoolingSystem.Instance.InstantiateAPS(GetResourceType().ToString(), transform.position)
             .GetComponent<Rigidbody>();
         rb.AddForce((Vector3.down + randomPos) * 50);
+        PlayerPrefs.SetInt($"{gameObject.name}_isDestroy", 1);
         Destroy(gameObject);
     }
 
@@ -54,26 +65,15 @@ public class Prop : MonoBehaviour
 
         checkFunctions = checkFunctions.OrderBy(f => new Random2().Next()).ToList();
 
-        foreach (var checkFunction in checkFunctions)
+        foreach (var result in checkFunctions.Select(checkFunction => checkFunction()).Where(result => result != ResourceTypes.None))
         {
-            var result = checkFunction();
-            if (result != ResourceTypes.None)
-            {
-                return result;
-            }
+            return result;
         }
 
         var resourceTypes = Enum.GetValues(typeof(ResourceTypes));
         var randomIndex = new Random2().Next(resourceTypes.Length);
         var random = (ResourceTypes)resourceTypes.GetValue(randomIndex);
-        if (random != ResourceTypes.None)
-        {
-            return random;
-        }
-        else
-        {
-            return ResourceTypes.Iron;
-        }
+        return random != ResourceTypes.None ? random : ResourceTypes.Iron;
 
 
 
